@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 5 }
+  validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
 
   # Returns the hash digest of the given string.
   def self.digest(string)
@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   # Returns a session token to prevent session hijacking.
-  # We reuse the remember digest for convenience.
+  # We reuse the remember digest for convenience.s
   def session_token
     remember_digest || remember
   end
